@@ -154,13 +154,13 @@ var qualityMetricCounters = {
 var complexities = {
   VARIABLEDECLARATION: 1,
   LITERAL: 1,
+  SWITCHCASE: 1,
+  BREAKSTATEMENT: 1,
   CALLEXPRESSION: 2,
   BINARYEXPRESSION: 2,
   UPDATEEXPRESSION: 2,
   MEMBEREXPRESSION: 3,
   SWITCHSTATEMENT: 3,
-  SWITCHCASE: 1,
-  BREAKSTATEMENT: 1,
   IFSTATEMENT: 4,
   WHILESTATEMENT: 5,
   FORSTATEMENT: 5,
@@ -168,13 +168,13 @@ var complexities = {
   ASSIGNMENTEXPRESSION: 6
 };
 
-var kataSessions = {
-  sessions: [
+var codeToAnalyse = {
+  codes: [
     {
       name: 'romanNumerals',
       code: function () {
-        var arabicDigits = [10, 5, 1];
-        var romanDigits = ['X', 'V', 'I'];
+        var arabicDigits = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        var romanDigits = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
 
         var convert = function (arabic) {
           var roman = "";
@@ -195,20 +195,20 @@ var kataSessions = {
 function getComplexityOfSessions() {
   var entireString;
   var functionBodyString;
-  var complexityOfSession;
+  var complexityOfCode;
 
-  for (var i = 0; i < kataSessions.sessions.length; i++) {
+  for (var i = 0; i < codeToAnalyse.codes.length; i++) {
     //extracts only the content between code: function () {}
-    entireString = kataSessions.sessions[i].code.toString();
+    entireString = codeToAnalyse.codes[i].code.toString();
     functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
 
-    complexityOfSession = getComplexity(functionBodyString);
-    kataSessions.sessions[i].complexityOfSession = complexityOfSession;
+    complexityOfCode = getComplexity(functionBodyString);
+    codeToAnalyse.codes[i].complexityOfSession = complexityOfCode;
 
-    console.log('TOTAL COMPLEXITY OF ' + kataSessions.sessions[i].name + ': ', complexityOfSession);
+    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyse.codes[i].name + ': ', complexityOfCode);
     console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
 
-    convertJsonToCsv(qualityMetricCounters, kataSessions.sessions[i].name);
+    convertJsonToCsv(qualityMetricCounters, codeToAnalyse.codes[i].name);
     resetQualityMetricCounters();
   }
 }
