@@ -6,7 +6,6 @@ var codeToAnalyzeFile = require('../js/codeToAnalyze.js');
 var codeToAnalyze = codeToAnalyzeFile.codeToAnalyze;
 
 
-
 function traverse(tree, transform) {
   estraverse.traverse(tree, {
     enter: function (node) {
@@ -17,7 +16,7 @@ function traverse(tree, transform) {
 
 var Syntax = estraverse.Syntax;
 
-function convertJsonToCsv(jsonObject, filename) {
+function convertObjectToCsv(jsonObject, filename) {
   var filenameAsString = filename.toString();
   json = jsonObject;
 
@@ -189,7 +188,7 @@ function getComplexityOfSessions() {
 //    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyze.codeParts[i].name + ': ', complexityOfSession);
 //    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
 
-    convertJsonToCsv(qualityMetricCounters, codeToAnalyze.codeParts[i].name);
+    convertObjectToCsv(qualityMetricCounters, codeToAnalyze.codeParts[i].name);
     resetQualityMetricCounters();
   }
 }
