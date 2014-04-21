@@ -2,6 +2,10 @@ var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
 var json2csv = require('json2csv');
 var fs = require('fs');
+var codiac = require('../js/codeToAnalyze.js');
+var codeToAnalyze = codiac.test;
+
+
 
 function traverse(tree, transform) {
   estraverse.traverse(tree, {
@@ -167,6 +171,30 @@ var complexities = {
   FORINSTATEMENT: 5,
   ASSIGNMENTEXPRESSION: 6
 };
+
+
+function getComplexityOfSessions() {
+  var entireString;
+  var functionBodyString;
+  var complexityOfSession;
+
+  for (var i = 0; i < codeToAnalyze.codeParts.length; i++) {
+    //extracts only the content between code: function () {}
+    entireString = codeToAnalyze.codeParts[i].code.toString();
+    functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
+
+    complexityOfSession = getComplexity(functionBodyString);
+    codeToAnalyze.codeParts[i].complexityOfSession = complexityOfSession;
+
+//    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyze.codeParts[i].name + ': ', complexityOfSession);
+//    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
+
+    convertJsonToCsv(qualityMetricCounters, codeToAnalyze.codeParts[i].name);
+    resetQualityMetricCounters();
+  }
+}
+
+getComplexityOfSessions();
 
 module.exports = {
   getComplexity: getComplexity,
