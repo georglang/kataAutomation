@@ -1,0 +1,27 @@
+{
+  "name": "ComplexityMetrics",
+  "version": "0.0.1",
+  "author": "Georg Lang",
+  "license": "MIT",
+  "description": "Measure code quality of JavaScript Code",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "estraverse": "~1.5.0",
+    "esprima": "~1.1.1",
+    "jasmine-node": "~1.13.1",
+    "json2csv": "~2.2.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.14.3"
+  },
+  "scripts": {
+    "test": "jasmine-node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/georglang/kataAutomation.git"
+  }
+}
