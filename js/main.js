@@ -168,31 +168,6 @@ var complexities = {
   ASSIGNMENTEXPRESSION: 6
 };
 
-var codeToAnalyse = {
-  codes: [
-    {
-      name: 'romanNumeralsS2 Impl12',
-      code: function () {
-        var arabicDigits = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-        var romanDigits = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
-
-        var convert = function (arabic) {
-          var roman = "";
-
-          for (var i = 0; i < arabicDigits.length; i++) {
-            while (arabic >= arabicDigits[i]) {
-              roman += romanDigits[i];
-              arabic -= arabicDigits[i];
-            }
-          }
-          return roman;
-        };
-
-      }
-    }
-  ]
-};
-
 function getComplexityOfSessions() {
   var entireString;
   var functionBodyString;
