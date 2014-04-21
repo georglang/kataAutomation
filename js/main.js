@@ -1,8 +1,9 @@
 var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
 
-var codeToAnalyzeFile = require('../js/codeToAnalyze.js');
-var convertObjectToCsvFile = require('../js/convertObjectToCsv.js');
+var codeToAnalyzeFile = require('./codeToAnalyze.js');
+var convertObjectToCsvFile = require('./convertObjectToCsv.js');
+var complexities = require('./configComplexities.js');
 
 var codeToAnalyze = codeToAnalyzeFile.codeToAnalyze;
 var convertObjectToCsv = convertObjectToCsvFile.convertObjectToCsv;
@@ -116,24 +117,6 @@ var qualityMetricCounters = {
   AssignmentExpressionCounter: 0,
   UpdateExpressionCounter: 0
 }
-
-var complexities = {
-  VARIABLEDECLARATION: 1,
-  LITERAL: 1,
-  SWITCHCASE: 1,
-  BREAKSTATEMENT: 1,
-  CALLEXPRESSION: 2,
-  BINARYEXPRESSION: 2,
-  UPDATEEXPRESSION: 2,
-  MEMBEREXPRESSION: 3,
-  SWITCHSTATEMENT: 3,
-  IFSTATEMENT: 4,
-  WHILESTATEMENT: 5,
-  FORSTATEMENT: 5,
-  FORINSTATEMENT: 5,
-  ASSIGNMENTEXPRESSION: 6
-};
-
 
 function getComplexityOfSessions() {
   var entireString;
