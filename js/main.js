@@ -1,9 +1,11 @@
 var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
-var json2csv = require('json2csv');
-var fs = require('fs');
+
 var codeToAnalyzeFile = require('../js/codeToAnalyze.js');
+var convertObjectToCsvFile = require('../js/convertObjectToCsv.js');
+
 var codeToAnalyze = codeToAnalyzeFile.codeToAnalyze;
+var convertObjectToCsv = convertObjectToCsvFile.convertObjectToCsv;
 
 
 function traverse(tree, transform) {
@@ -15,45 +17,6 @@ function traverse(tree, transform) {
 }
 
 var Syntax = estraverse.Syntax;
-
-function convertObjectToCsv(jsonObject, filename) {
-  var filenameAsString = filename.toString();
-  json = jsonObject;
-
-  json2csv(
-      {
-        data: json,
-        fields: [
-          'VariableDeclartationCounter',
-          'LiteralCounter',
-          'CallExpressionCounter',
-          'BinaryExpressionCounter',
-          'MemberExpressionCounter',
-          'SwitchStatementCounter',
-          'SwitchCaseCounter',
-          'BreakStatementCounter',
-          'IfStatementCounter',
-          'WhileStatementCounter',
-          'ForStatementCounter',
-          'ForInStatementCounter',
-          'AssignmentExpressionCounter',
-          'UpdateExpressionCounter'
-        ]
-      },
-      function (err, csv) {
-        if (err) {
-          console.log(err);
-        }
-        fs.writeFile(filenameAsString + '.csv', csv, function (err) {
-              if (err) {
-                throw err;
-              }
-              console.log('file saved');
-            }
-        );
-      }
-  );
-}
 
 function getComplexity(code) {
   var totalComplexity = 0;
