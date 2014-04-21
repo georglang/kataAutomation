@@ -23,5 +23,5 @@ var codeToAnalyze = {
 };
 
 module.exports = {
-  test: codeToAnalyze
+  codeToAnalyze: codeToAnalyze
 };

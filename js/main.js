@@ -2,8 +2,8 @@ var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
 var json2csv = require('json2csv');
 var fs = require('fs');
-var codiac = require('../js/codeToAnalyze.js');
-var codeToAnalyze = codiac.test;
+var codeToAnalyzeFile = require('../js/codeToAnalyze.js');
+var codeToAnalyze = codeToAnalyzeFile.codeToAnalyze;
 
 
 
