@@ -171,24 +171,23 @@ var complexities = {
 function getComplexityOfSessions() {
   var entireString;
   var functionBodyString;
-  var complexityOfCode;
+  var complexityOfSession;
 
-  for (var i = 0; i < codeToAnalyse.codes.length; i++) {
+  for (var i = 0; i < codeToAnalyze.codeParts.length; i++) {
     //extracts only the content between code: function () {}
-    entireString = codeToAnalyse.codes[i].code.toString();
+    entireString = codeToAnalyze.codeParts[i].code.toString();
     functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
 
-    complexityOfCode = getComplexity(functionBodyString);
-    codeToAnalyse.codes[i].complexityOfSession = complexityOfCode;
+    complexityOfSession = getComplexity(functionBodyString);
+    codeToAnalyze.codeParts[i].complexityOfSession = complexityOfSession;
 
-    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyse.codes[i].name + ': ', complexityOfCode);
-    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
+//    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyze.codeParts[i].name + ': ', complexityOfSession);
+//    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
 
-    convertJsonToCsv(qualityMetricCounters, codeToAnalyse.codes[i].name);
+    convertJsonToCsv(qualityMetricCounters, codeToAnalyze.codeParts[i].name);
     resetQualityMetricCounters();
   }
 }
-getComplexityOfSessions();
 
 module.exports = {
   getComplexity: getComplexity,
