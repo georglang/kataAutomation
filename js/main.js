@@ -168,27 +168,6 @@ var complexities = {
   ASSIGNMENTEXPRESSION: 6
 };
 
-function getComplexityOfSessions() {
-  var entireString;
-  var functionBodyString;
-  var complexityOfSession;
-
-  for (var i = 0; i < codeToAnalyze.codeParts.length; i++) {
-    //extracts only the content between code: function () {}
-    entireString = codeToAnalyze.codeParts[i].code.toString();
-    functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
-
-    complexityOfSession = getComplexity(functionBodyString);
-    codeToAnalyze.codeParts[i].complexityOfSession = complexityOfSession;
-
-//    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyze.codeParts[i].name + ': ', complexityOfSession);
-//    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
-
-    convertJsonToCsv(qualityMetricCounters, codeToAnalyze.codeParts[i].name);
-    resetQualityMetricCounters();
-  }
-}
-
 module.exports = {
   getComplexity: getComplexity,
   complexities: complexities
