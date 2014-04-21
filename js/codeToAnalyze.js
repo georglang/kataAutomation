@@ -22,6 +22,4 @@ var codeToAnalyze = {
   ]
 };
 
-module.exports = {
-  codeToAnalyze: codeToAnalyze
-};
+module.exports = codeToAnalyze;

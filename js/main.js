@@ -1,12 +1,9 @@
 var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
 
-var codeToAnalyzeFile = require('./codeToAnalyze.js');
-var convertObjectToCsvFile = require('./convertObjectToCsv.js');
+var codeToAnalyze = require('./codeToAnalyze.js');
+var convertObjectToCsv = require('./convertObjectToCsv.js');
 var complexities = require('./configComplexities.js');
-
-var codeToAnalyze = codeToAnalyzeFile.codeToAnalyze;
-var convertObjectToCsv = convertObjectToCsvFile.convertObjectToCsv;
 
 
 function traverse(tree, transform) {

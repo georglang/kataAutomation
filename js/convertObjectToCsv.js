@@ -40,6 +40,4 @@ function convertObjectToCsv(jsonObject, filename) {
   );
 }
 
-module.exports = {
-  convertObjectToCsv: convertObjectToCsv
-};
+module.exports = convertObjectToCsv;
