@@ -4,6 +4,7 @@ var esprima = require('../node_modules/esprima/esprima');
 var codeToAnalyze = require('./codeToAnalyze.js');
 var convertObjectToCsv = require('./convertObjectToCsv.js');
 var complexities = require('./configComplexities.js');
+var qualityMetricsCounters = require('./qualityMetricsCounters.js');
 
 
 function traverse(tree, transform) {
@@ -23,97 +24,81 @@ function getComplexity(code) {
   traverse(tree, function (node, parents) {
     if (node.type == Syntax.VariableDeclaration) {
       totalComplexity += complexities.VARIABLEDECLARATION;
-      ++(qualityMetricCounters.VariableDeclartationCounter);
+      ++(qualityMetricsCounters.VariableDeclartationCounter);
     }
     if (node.type == Syntax.Literal) {
       totalComplexity += complexities.LITERAL;
-      ++qualityMetricCounters.LiteralCounter;
+      ++qualityMetricsCounters.LiteralCounter;
     }
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       totalComplexity += complexities.CALLEXPRESSION;
-      ++qualityMetricCounters.CallExpressionCounter;
+      ++qualityMetricsCounters.CallExpressionCounter;
     }
     if (node.type == Syntax.MemberExpression) {
       totalComplexity += complexities.MEMBEREXPRESSION;
-      ++qualityMetricCounters.MemberExpressionCounter;
+      ++qualityMetricsCounters.MemberExpressionCounter;
     }
     if (node.type == Syntax.WhileStatement) {
       totalComplexity += complexities.WHILESTATEMENT;
-      ++qualityMetricCounters.WhileStatementCounter;
+      ++qualityMetricsCounters.WhileStatementCounter;
     }
     if (node.type == Syntax.ForStatement) {
       totalComplexity += complexities.FORSTATEMENT;
-      ++qualityMetricCounters.ForStatementCounter;
+      ++qualityMetricsCounters.ForStatementCounter;
     }
     if (node.type == Syntax.ForInStatement) {
       totalComplexity += complexities.FORINSTATEMENT;
-      ++qualityMetricCounters.ForInStatementCounter;
+      ++qualityMetricsCounters.ForInStatementCounter;
     }
     if (node.type == Syntax.BinaryExpression) {
       totalComplexity += complexities.BINARYEXPRESSION;
-      ++qualityMetricCounters.BinaryExpressionCounter;
+      ++qualityMetricsCounters.BinaryExpressionCounter;
     }
     if (node.type == Syntax.AssignmentExpression) {
       totalComplexity += complexities.ASSIGNMENTEXPRESSION;
-      ++qualityMetricCounters.AssignmentExpressionCounter;
+      ++qualityMetricsCounters.AssignmentExpressionCounter;
     }
     if (node.type == Syntax.SwitchStatement) {
       totalComplexity += complexities.SWITCHSTATEMENT;
-      ++qualityMetricCounters.SwitchStatementCounter;
+      ++qualityMetricsCounters.SwitchStatementCounter;
     }
     if (node.type == Syntax.SwitchCase) {
       totalComplexity += complexities.SWITCHCASE;
-      ++qualityMetricCounters.SwitchCaseCounter;
+      ++qualityMetricsCounters.SwitchCaseCounter;
     }
     if (node.type == Syntax.BreakStatement) {
       totalComplexity += complexities.BREAKSTATEMENT;
-      ++qualityMetricCounters.BreakStatementCounter;
+      ++qualityMetricsCounters.BreakStatementCounter;
     }
     if (node.type == Syntax.IfStatement) {
       totalComplexity += complexities.IFSTATEMENT;
-      ++qualityMetricCounters.IfStatementCounter;
+      ++qualityMetricsCounters.IfStatementCounter;
     }
     if (node.type == Syntax.UpdateExpression) {
       totalComplexity += complexities.UPDATEEXPRESSION;
-      ++qualityMetricCounters.UpdateExpressionCounter;
+      ++qualityMetricsCounters.UpdateExpressionCounter;
     }
   });
   return totalComplexity;
 }
 
 function resetQualityMetricCounters() {
-  qualityMetricCounters.VariableDeclartationCounter = 0,
-      qualityMetricCounters.LiteralCounter = 0,
-      qualityMetricCounters.CallExpressionCounter = 0,
-      qualityMetricCounters.BinaryExpressionCounter = 0,
-      qualityMetricCounters.MemberExpressionCounter = 0,
-      qualityMetricCounters.SwitchStatementCounter = 0,
-      qualityMetricCounters.SwitchCaseCounter = 0,
-      qualityMetricCounters.BreakStatementCounter = 0,
-      qualityMetricCounters.IfStatementCounter = 0,
-      qualityMetricCounters.WhileStatementCounter = 0,
-      qualityMetricCounters.ForStatementCounter = 0,
-      qualityMetricCounters.ForInStatementCounter = 0,
-      qualityMetricCounters.AssignmentExpressionCounter = 0,
-      qualityMetricCounters.UpdateExpressionCounter = 0
+  qualityMetricsCounters.VariableDeclartationCounter = 0,
+      qualityMetricsCounters.LiteralCounter = 0,
+      qualityMetricsCounters.CallExpressionCounter = 0,
+      qualityMetricsCounters.BinaryExpressionCounter = 0,
+      qualityMetricsCounters.MemberExpressionCounter = 0,
+      qualityMetricsCounters.SwitchStatementCounter = 0,
+      qualityMetricsCounters.SwitchCaseCounter = 0,
+      qualityMetricsCounters.BreakStatementCounter = 0,
+      qualityMetricsCounters.IfStatementCounter = 0,
+      qualityMetricsCounters.WhileStatementCounter = 0,
+      qualityMetricsCounters.ForStatementCounter = 0,
+      qualityMetricsCounters.ForInStatementCounter = 0,
+      qualityMetricsCounters.AssignmentExpressionCounter = 0,
+      qualityMetricsCounters.UpdateExpressionCounter = 0
 }
 
-var qualityMetricCounters = {
-  VariableDeclartationCounter: 0,
-  LiteralCounter: 0,
-  CallExpressionCounter: 0,
-  BinaryExpressionCounter: 0,
-  MemberExpressionCounter: 0,
-  SwitchStatementCounter: 0,
-  SwitchCaseCounter: 0,
-  BreakStatementCounter: 0,
-  IfStatementCounter: 0,
-  WhileStatementCounter: 0,
-  ForStatementCounter: 0,
-  ForInStatementCounter: 0,
-  AssignmentExpressionCounter: 0,
-  UpdateExpressionCounter: 0
-}
 
 function getComplexityOfSessions() {
   var entireString;
@@ -129,9 +114,9 @@ function getComplexityOfSessions() {
     codeToAnalyze.codeParts[i].complexityOfSession = complexityOfSession;
 
 //    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyze.codeParts[i].name + ': ', complexityOfSession);
-//    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricCounters);
+//    console.log('OCCURENCE OF QUALITYMETRIKS: ', qualityMetricsCounters);
 
-    convertObjectToCsv(qualityMetricCounters, codeToAnalyze.codeParts[i].name);
+    convertObjectToCsv(qualityMetricsCounters, codeToAnalyze.codeParts[i].name);
     resetQualityMetricCounters();
   }
 }
