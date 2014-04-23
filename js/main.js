@@ -3,9 +3,7 @@ var esprima = require('../node_modules/esprima/esprima');
 
 var codeToAnalyze = require('./codeToAnalyze.js');
 var convertObjectToCsv = require('./convertObjectToCsv.js');
-var astNodes = require('./configComplexities.js');
-
-var qualityMetricsCounters = require('./qualityMetricsCounters.js');
+var astNodes = require('./astNodes.js');
 
 function traverse(tree, transform) {
   estraverse.traverse(tree, {
@@ -27,7 +25,6 @@ function getComplexity(code) {
     if (astNode === undefined) {
       return;
     }
-
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
       totalComplexity += astNodes.CallExpression.complexity;
       ++astNodes.CallExpression.counter;
@@ -41,22 +38,10 @@ function getComplexity(code) {
 }
 
 function resetQualityMetricCounters() {
-      qualityMetricsCounters.VariableDeclartationCounter = 0,
-      qualityMetricsCounters.LiteralCounter = 0,
-      qualityMetricsCounters.CallExpressionCounter = 0,
-      qualityMetricsCounters.BinaryExpressionCounter = 0,
-      qualityMetricsCounters.MemberExpressionCounter = 0,
-      qualityMetricsCounters.SwitchStatementCounter = 0,
-      qualityMetricsCounters.SwitchCaseCounter = 0,
-      qualityMetricsCounters.BreakStatementCounter = 0,
-      qualityMetricsCounters.IfStatementCounter = 0,
-      qualityMetricsCounters.WhileStatementCounter = 0,
-      qualityMetricsCounters.ForStatementCounter = 0,
-      qualityMetricsCounters.ForInStatementCounter = 0,
-      qualityMetricsCounters.AssignmentExpressionCounter = 0,
-      qualityMetricsCounters.UpdateExpressionCounter = 0
+  for (var key in astNodes) {
+    astNodes[key].counter = 0;
+  }
 }
-
 
 function getComplexityOfCodeParts() {
   var entireString;
