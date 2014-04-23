@@ -1,4 +1,4 @@
-var ASTNodes = {
+var astNodes = {
   VariableDeclaration: {
     complexity: 1,
     counter: 0
@@ -57,4 +57,4 @@ var ASTNodes = {
   }
 };
 
-module.exports = ASTNodes;
+module.exports = astNodes;
