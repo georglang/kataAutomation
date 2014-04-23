@@ -4,12 +4,12 @@ var fs = require('fs');
 function convertObjectToCsv(complexities, filename) {
   var filenameAsString = filename.toString();
 
-  var counter = {};
+  var qualityMetricCounters = {};
   for (var key in complexities) {
-    counter[key] = complexities[key].counter;
+    qualityMetricCounters[key] = complexities[key].counter;
   }
 
-  var json = counter;
+  var json = qualityMetricCounters;
 
   json2csv(
       {
