@@ -15,20 +15,20 @@ function convertObjectToCsv(complexities, filename) {
       {
         data: json,
         fields: [
-          'VariableDeclartationCounter',
-          'LiteralCounter',
-          'CallExpressionCounter',
-          'BinaryExpressionCounter',
-          'MemberExpressionCounter',
-          'SwitchStatementCounter',
-          'SwitchCaseCounter',
-          'BreakStatementCounter',
-          'IfStatementCounter',
-          'WhileStatementCounter',
-          'ForStatementCounter',
-          'ForInStatementCounter',
-          'AssignmentExpressionCounter',
-          'UpdateExpressionCounter'
+          'VariableDeclaration',
+          'Literal',
+          'CallExpression',
+          'BinaryExpression',
+          'MemberExpression',
+          'SwitchStatement',
+          'SwitchCase',
+          'BreakStatement',
+          'IfStatement',
+          'WhileStatement',
+          'ForStatement',
+          'ForInStatement',
+          'AssignmentExpression',
+          'UpdateExpression'
         ]
       },
       function (err, csv) {
