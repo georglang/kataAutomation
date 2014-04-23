@@ -54,6 +54,9 @@ var astNodes = {
   AssignmentExpression: {
     complexity: 6,
     counter: 0
+  },
+  TotalComplexity: {
+    counter: 0
   }
 };
 
