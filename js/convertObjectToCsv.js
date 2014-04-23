@@ -1,9 +1,15 @@
 var json2csv = require('json2csv');
 var fs = require('fs');
 
-function convertObjectToCsv(jsonObject, filename) {
+function convertObjectToCsv(complexities, filename) {
   var filenameAsString = filename.toString();
-  json = jsonObject;
+
+  var counter = {};
+  for (var key in complexities) {
+    counter[key] = complexities[key].counter;
+  }
+
+  var json = counter;
 
   json2csv(
       {
