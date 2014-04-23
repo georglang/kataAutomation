@@ -3,7 +3,7 @@ var esprima = require('../node_modules/esprima/esprima');
 
 var codeToAnalyze = require('./codeToAnalyze.js');
 var convertObjectToCsv = require('./convertObjectToCsv.js');
-var complexities = require('./configComplexities.js');
+var astNodes = require('./configComplexities.js');
 
 var qualityMetricsCounters = require('./qualityMetricsCounters.js');
 
@@ -15,8 +15,6 @@ function traverse(tree, transform) {
   });
 }
 
-//console.log(qualityMetricsCounters);
-
 var Syntax = estraverse.Syntax;
 
 function getComplexity(code) {
@@ -24,15 +22,15 @@ function getComplexity(code) {
   var tree = esprima.parse(code);
 
   traverse(tree, function (node, parents) {
-    var astNode = complexities[node.type];
+    var astNode = astNodes[node.type];
 
     if (astNode === undefined) {
       return;
     }
 
     if (node.type == Syntax.CallExpression && (node.callee.type != Syntax.MemberExpression)) {
-      totalComplexity += complexities.CallExpression.complexity;
-      ++complexities.CallExpression.counter;
+      totalComplexity += astNodes.CallExpression.complexity;
+      ++astNodes.CallExpression.counter;
     }
     else if (node.type !== Syntax.CallExpression) {
       totalComplexity += astNode.complexity;
@@ -60,7 +58,7 @@ function resetQualityMetricCounters() {
 }
 
 
-function getComplexityOfSessions() {
+function getComplexityOfCodeParts() {
   var entireString;
   var functionBodyString;
   var complexityOfSession;
@@ -73,17 +71,14 @@ function getComplexityOfSessions() {
     complexityOfSession = getComplexity(functionBodyString);
     codeToAnalyze.codeParts[i].complexityOfSession = complexityOfSession;
 
-//    console.log('TOTAL COMPLEXITY OF ' + codeToAnalyze.codeParts[i].name + ': ', complexityOfSession);
-//    console.log('OCCURENCE OF QUALITYMETRIKS: ', complexities);
-
-    convertObjectToCsv(complexities, codeToAnalyze.codeParts[i].name);
+    convertObjectToCsv(astNodes, codeToAnalyze.codeParts[i].name);
     resetQualityMetricCounters();
   }
 }
 
-getComplexityOfSessions();
+getComplexityOfCodeParts();
 
 module.exports = {
   getComplexity: getComplexity,
-  complexities: complexities
+  complexities: astNodes
 };
