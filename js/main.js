@@ -34,6 +34,7 @@ function getComplexity(code) {
       ++astNode.counter;
     }
   });
+  astNodes.TotalComplexity.counter = totalComplexity;
   return totalComplexity;
 }
 
@@ -65,5 +66,5 @@ getComplexityOfCodeParts();
 
 module.exports = {
   getComplexity: getComplexity,
-  complexities: astNodes
+  astNodes: astNodes
 };
