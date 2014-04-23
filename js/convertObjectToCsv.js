@@ -1,12 +1,12 @@
 var json2csv = require('json2csv');
 var fs = require('fs');
 
-function convertObjectToCsv(complexities, filename) {
+function convertObjectToCsv(astNodes, filename) {
   var filenameAsString = filename.toString();
 
   var qualityMetricCounters = {};
-  for (var key in complexities) {
-    qualityMetricCounters[key] = complexities[key].counter;
+  for (var node in astNodes) {
+    qualityMetricCounters[node] = astNodes[node].counter;
   }
 
   var json = qualityMetricCounters;
@@ -28,7 +28,8 @@ function convertObjectToCsv(complexities, filename) {
           'ForStatement',
           'ForInStatement',
           'AssignmentExpression',
-          'UpdateExpression'
+          'UpdateExpression',
+          'TotalComplexity',
         ]
       },
       function (err, csv) {
