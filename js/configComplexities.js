@@ -1,18 +1,60 @@
-var complexities = {
-  VARIABLEDECLARATION: 1,
-  LITERAL: 1,
-  SWITCHCASE: 1,
-  BREAKSTATEMENT: 1,
-  CALLEXPRESSION: 2,
-  BINARYEXPRESSION: 2,
-  UPDATEEXPRESSION: 2,
-  MEMBEREXPRESSION: 3,
-  SWITCHSTATEMENT: 3,
-  IFSTATEMENT: 4,
-  WHILESTATEMENT: 5,
-  FORSTATEMENT: 5,
-  FORINSTATEMENT: 5,
-  ASSIGNMENTEXPRESSION: 6
+var ASTNodes = {
+  VariableDeclaration: {
+    complexity: 1,
+    counter: 0
+  },
+  Literal: {
+    complexity: 1,
+    counter: 0
+  },
+  SwitchCase: {
+    complexity: 1,
+    counter: 0
+  },
+  BreakStatement: {
+    complexity: 1,
+    counter: 0
+  },
+  CallExpression: {
+    complexity: 1,
+    counter: 0
+  },
+  BinaryExpression: {
+    complexity: 1,
+    counter: 0
+  },
+  UpdateExpression: {
+    complexity: 2,
+    counter: 0
+  },
+  MemberExpression: {
+    complexity: 1,
+    counter: 0
+  },
+  SwitchStatement: {
+    complexity: 3,
+    counter: 0
+  },
+  IfStatement: {
+    complexity: 4,
+    counter: 0
+  },
+  WhileStatement: {
+    complexity: 5,
+    counter: 0
+  },
+  ForStatement: {
+    complexity: 5,
+    counter: 0
+  },
+  ForInStatement: {
+    complexity: 5,
+    counter: 0
+  },
+  AssignmentExpression: {
+    complexity: 6,
+    counter: 0
+  }
 };
 
-module.exports = complexities;
+module.exports = ASTNodes;
