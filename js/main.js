@@ -17,7 +17,7 @@ var Syntax = estraverse.Syntax;
 
 function getComplexity(code) {
   var totalComplexity = 0;
-  var tree = esprima.parse(code);
+  var ast = esprima.parse(code);
 
   function addToTotalComplexity(node) {
     var astNode = astNodes[node.type];
@@ -35,7 +35,7 @@ function getComplexity(code) {
     }
   }
 
-  traverse(tree, addToTotalComplexity);
+  traverse(ast, addToTotalComplexity);
 
   astNodes.TotalComplexity.counter = totalComplexity;
   return totalComplexity;
