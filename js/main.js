@@ -19,7 +19,7 @@ function getComplexity(code) {
   var totalComplexity = 0;
   var tree = esprima.parse(code);
 
-  traverse(tree, function (node, parents) {
+  function addToTotalComplexity(node) {
     var astNode = astNodes[node.type];
 
     if (astNode === undefined) {
@@ -33,7 +33,10 @@ function getComplexity(code) {
       totalComplexity += astNode.complexity;
       ++astNode.counter;
     }
-  });
+  }
+
+  traverse(tree, addToTotalComplexity);
+
   astNodes.TotalComplexity.counter = totalComplexity;
   return totalComplexity;
 }
