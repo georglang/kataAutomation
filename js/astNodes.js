@@ -7,32 +7,32 @@ var astNodes = {
     complexity: 1,
     counter: 0
   },
-  SwitchCase: {
-    complexity: 1,
-    counter: 0
-  },
-  BreakStatement: {
-    complexity: 1,
-    counter: 0
-  },
-  CallExpression: {
-    complexity: 1,
-    counter: 0
-  },
   BinaryExpression: {
-    complexity: 1,
+    complexity: 2,
     counter: 0
   },
   UpdateExpression: {
     complexity: 2,
     counter: 0
   },
+  CallExpression: {
+    complexity: 2,
+    counter: 0
+  },
   MemberExpression: {
-    complexity: 1,
+    complexity: 3,
     counter: 0
   },
   SwitchStatement: {
     complexity: 3,
+    counter: 0
+  },
+  SwitchCase: {
+    complexity: 1,
+    counter: 0
+  },
+  BreakStatement: {
+    complexity: 1,
     counter: 0
   },
   IfStatement: {
