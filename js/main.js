@@ -50,17 +50,18 @@ function resetQualityMetricCounters() {
 function getComplexityOfCodeParts() {
   var entireString;
   var functionBodyString;
-  var complexityOfSession;
+  var complexityOfCodePart;
+  var nameOfCodePart;
 
   for (var i = 0; i < codeToAnalyze.codeParts.length; i++) {
     //extracts only the content between code: function () {}
     entireString = codeToAnalyze.codeParts[i].code.toString();
     functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
 
-    complexityOfSession = getComplexity(functionBodyString);
-    codeToAnalyze.codeParts[i].complexityOfSession = complexityOfSession;
+    complexityOfCodePart = getComplexity(functionBodyString);
+    nameOfCodePart = codeToAnalyze.codeParts[i].name
 
-    convertObjectToCsv(astNodes, codeToAnalyze.codeParts[i].name);
+    convertObjectToCsv(astNodes, nameOfCodePart);
     resetQualityMetricCounters();
   }
 }
