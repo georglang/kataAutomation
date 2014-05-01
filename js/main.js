@@ -1,7 +1,7 @@
 var estraverse = require('../node_modules/estraverse/estraverse');
 var esprima = require('../node_modules/esprima/esprima');
 
-var codeToAnalyze = require('./codeToAnalyze.js');
+var codeToAnalyse = require('./codeToAnalyse.js');
 var convertObjectToCsv = require('./convertObjectToCsv.js');
 var astNodes = require('./astNodes.js');
 
@@ -53,13 +53,13 @@ function getComplexityOfCodeParts() {
   var complexityOfCodePart;
   var nameOfCodePart;
 
-  for (var i = 0; i < codeToAnalyze.codeParts.length; i++) {
+  for (var i = 0; i < codeToAnalyse.length; i++) {
     //extracts only the content between code: function () {}
-    entireString = codeToAnalyze.codeParts[i].code.toString();
+    entireString = codeToAnalyse[i].code.toString();
     functionBodyString = entireString.substring(entireString.indexOf("{") + 1, entireString.lastIndexOf("}"));
 
     complexityOfCodePart = getComplexity(functionBodyString);
-    nameOfCodePart = codeToAnalyze.codeParts[i].name
+    nameOfCodePart = codeToAnalyse[i].name
 
     convertObjectToCsv(astNodes, nameOfCodePart);
     resetQualityMetricCounters();
